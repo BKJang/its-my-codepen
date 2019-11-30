@@ -6,16 +6,16 @@ const options = {
   threshold: [0.0, 1.0]
 }
 
-const renderVisibleText = (isIntersecting, element) => {
+const renderVisibleText = function (isIntersecting, element) {
   if (isIntersecting) {
-    element.innerHTML = `<span>VISIBLE</span>`;
+    element.innerHTML = '<span>VISIBLE</span>';
   } else {
-    element.innerHTML = `<span>UNVISIBLE</span>`;
+    element.innerHTML = '<span>UNVISIBLE</span>';
   }
 }
 
-const scrollEventWithRect = element => {
-  window.addEventListener('scroll', () => {
+const scrollEventWithRect = function (element) {
+  window.addEventListener('scroll', function () {
     const rect = element.getBoundingClientRect();
     const inViewport = rect.bottom > 0 && rect.right > 0 &&
       rect.left < window.innerWidth &&
@@ -25,21 +25,26 @@ const scrollEventWithRect = element => {
   });
 }
 
-const io = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    const target = entry.target;
+const io = (function () {
+  if (INTERSECTION_OBSERVER_EXIST) {
+    return new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        const target = entry.target;
 
-    renderVisibleText(entry.isIntersecting, target);
-  })
-}, options)
-
+        renderVisibleText(entry.isIntersecting, target);
+      });
+    });
+  } else {
+    return {
+      observe: function (element) {
+        scrollEventWithRect(element);
+      }
+    }
+  }
+}());
 
 const boxElements = document.querySelectorAll('.box');
 
-boxElements.forEach(element => {
-  if (!INTERSECTION_OBSERVER_EXIST) {
-    io.observe(element);
-  } else {
-    scrollEventWithRect(element);
-  }
+Array.prototype.slice.call(boxElements).forEach(function (element) {
+  io.observe(element);
 });
