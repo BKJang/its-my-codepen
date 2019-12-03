@@ -1,0 +1,49 @@
+.image-sprite {
+  background: url("./naver_search.png") no-repeat;
+}
+
+.naver_logo {
+  background-position: 0px 0px;
+  height: 110px;
+  width: 400px;
+}
+
+.keyboard-on {
+  background-position: -110px -100px;
+  height: 40px;
+  width: 50px;
+}
+
+.keyboard-off {
+  background-position: -57px -100px;
+  height: 40px;
+  width: 50px;
+}
+
+.arrow-down-on {
+  background-position: -165px -100px;
+  height: 40px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+.arrow-down-off {
+  background-position: -199px -100px;
+  height: 40px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+.arrow-up-on {
+  background-position: -266px -100px;
+  height: 40px;
+  width: 30px;
+  margin-left: 10px;
+}
+
+.arrow-up-off {
+  background-position: -231px -100px;
+  height: 40px;
+  width: 30px;
+  margin-left: 10px;
+}
